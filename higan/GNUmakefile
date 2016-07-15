@@ -2,9 +2,14 @@ include ../nall/GNUmakefile
 
 target := tomoko
 # console := true
+# debugger := true
 
 flags += -I. -I.. -O3
 objects := libco audio video resource
+
+ifeq ($(debugger),true)
+	flags += -DDEBUGGER
+endif
 
 # profile-guided optimization mode
 # pgo := instrument
@@ -61,5 +66,5 @@ ui := target-$(target)
 include $(ui)/GNUmakefile
 
 clean:
-	-@$(call delete,out/*)
 	-@$(call delete,obj/*)
+	-@$(call delete,out/*)
